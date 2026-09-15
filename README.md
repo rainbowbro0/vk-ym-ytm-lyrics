@@ -56,7 +56,7 @@
 Требуется Python 3.
 
 ```bash
-git clone https://github.com/rainbowbro0/vk-ym-lyrics.git
+git clone https://github.com/rainbowbro0/vk-ym-ytm-lyrics.git
 cd vk-ym-lyrics
 python build.py
 ```

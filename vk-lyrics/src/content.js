@@ -183,9 +183,8 @@ scanAudioElements();
 // ─── Инфо о треке ─────────────────────────────────────────────────────────────
 function decodeHTML(s) {
   if (!s || !s.includes('&')) return s;
-  const el = document.createElement('textarea');
-  el.innerHTML = s;
-  return el.value;
+  const ENT = { '&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&#39;':"'",'&apos;':"'",'&nbsp;':'\u00A0' };
+  return s.replace(/&(?:amp|lt|gt|quot|#39|apos|nbsp);/g, x => ENT[x] || x);
 }
 
 function getTrackInfo() {
@@ -983,11 +982,6 @@ function createPanel() {
   panel.id = 'vkl-panel';
   panel.className = 'vkl-panel';
 
-  const tabsHtml = SOURCES.map(s =>
-    `<button class="vkl-src-tab${s.id === source ? ' vkl-src-tab--active' : ''}"
-             data-src="${s.id}">${s.label}</button>`
-  ).join('');
-
   panel.innerHTML = `
     <div class="vkl-panel-topbar">
       <button class="vkl-topbar-btn" id="vkl-settings-btn" title="Настройки">
@@ -1002,7 +996,7 @@ function createPanel() {
         <div class="vkl-artist"></div>
       </div>
     </div>
-    <div class="vkl-source-bar">${tabsHtml}</div>
+    <div class="vkl-source-bar"></div>
     <div class="vkl-status">Ожидание трека…</div>
     <div class="vkl-body-wrap">
       <div class="vkl-body"></div>
@@ -1038,6 +1032,15 @@ function createPanel() {
       </div>
     </div>
   `;
+
+  const sourceBar = panel.querySelector('.vkl-source-bar');
+  SOURCES.forEach(s => {
+    const tab = document.createElement('button');
+    tab.className = 'vkl-src-tab' + (s.id === source ? ' vkl-src-tab--active' : '');
+    tab.dataset.src = s.id;
+    tab.textContent = s.label;
+    sourceBar.appendChild(tab);
+  });
 
   // Закрыть
   panel.querySelector('#vkl-close').addEventListener('click', closePanel);
@@ -1207,14 +1210,16 @@ function createPanel() {
     volumePopup = document.createElement('div');
     volumePopup.className = 'vkl-volume-popup';
     volumePopup.innerHTML = `
-      <span class="vkl-volume-pct">${vol}%</span>
-      <input class="vkl-volume-slider" type="range" min="0" max="100" value="${vol}" step="1">
+      <span class="vkl-volume-pct"></span>
+      <input class="vkl-volume-slider" type="range" min="0" max="100" value="0" step="1">
       <div class="vkl-vol-icon">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.4)">
           <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
         </svg>
       </div>
     `;
+    volumePopup.querySelector('.vkl-volume-pct').textContent = vol + '%';
+    volumePopup.querySelector('.vkl-volume-slider').value = vol;
 
     const slider = volumePopup.querySelector('.vkl-volume-slider');
     const pct    = volumePopup.querySelector('.vkl-volume-pct');
@@ -1361,7 +1366,7 @@ function showSettingsModal() {
       <h3>Настройки</h3>
       <label>
         <span>Genius Client Access Token</span>
-        <input type="password" id="vkl-genius-input" placeholder="Вставьте токен…" value="${geniusToken}">
+        <input type="password" id="vkl-genius-input" placeholder="Вставьте токен…" value="">
       </label>
       <div class="vkl-settings-buttons">
         <button id="vkl-save-genius">Сохранить</button>
@@ -1369,6 +1374,7 @@ function showSettingsModal() {
       </div>
     </div>
   `;
+  modal.querySelector('#vkl-genius-input').value = geniusToken;
   document.body.appendChild(modal);
 
   modal.querySelector('#vkl-save-genius').addEventListener('click', () => {

@@ -27,7 +27,15 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "vk-lyrics@rainbow",
-      "strict_min_version": "109.0"
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
     }
   },
   "content_scripts": [
@@ -61,7 +69,9 @@
     }
   ],
   "icons": {
-    "48": "icon.png"
+    "48": "icon-48.png",
+    "96": "icon-96.png",
+    "128": "icon-128.png"
   },
   "web_accessible_resources": [
     {

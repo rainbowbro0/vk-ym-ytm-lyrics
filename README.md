@@ -57,7 +57,7 @@
 
 ```bash
 git clone https://github.com/rainbowbro0/vk-ym-ytm-lyrics.git
-cd vk-ym-lyrics
+cd vk-ym-ytm-lyrics
 python build.py
 ```
 

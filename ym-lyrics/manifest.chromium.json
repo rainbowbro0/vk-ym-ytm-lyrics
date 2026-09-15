@@ -5,8 +5,7 @@
   "version": "1.0.0",
   "description": "Синхронизированный текст для Яндекс Музыки с fallback без externalAPI",
   "permissions": [
-    "storage",
-    "cookies"
+    "storage"
   ],
   "host_permissions": [
     "https://music.yandex.ru/*",

@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "YT Music Lyrics",
+  "short_name": "YT Music Lyrics",
+  "version": "1.0.0",
+  "description": "Текст песни для текущего трека YouTube Music",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://music.youtube.com/*",
+    "https://lrclib.net/*",
+    "https://apic-desktop.musixmatch.com/*",
+    "https://api.genius.com/*",
+    "https://genius.com/*",
+    "https://genius-proxy.rainbowbro0.workers.dev/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "bridge.js"
+      ],
+      "matches": [
+        "https://music.youtube.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "matches": [
+        "https://music.youtube.com/*"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "no-cover.png"
+      ],
+      "matches": [
+        "https://music.youtube.com/*"
+      ]
+    }
+  ]
+}

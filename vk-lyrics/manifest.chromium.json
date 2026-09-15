@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "VK Lyrics",
+  "short_name": "VK Lyrics",
+  "version": "1.0.0",
+  "description": "Текст песни для текущего трека ВКонтакте",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://vk.com/*",
+    "https://*.vk.com/*",
+    "https://vk.ru/*",
+    "https://*.vk.ru/*",
+    "https://lrclib.net/*",
+    "https://apic-desktop.musixmatch.com/*",
+    "https://api.genius.com/*",
+    "https://genius.com/*",
+    "https://web.api.vk.ru/*",
+    "https://genius-proxy.rainbowbro0.workers.dev/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "bridge.js"
+      ],
+      "matches": [
+        "https://vk.com/*",
+        "https://*.vk.com/*",
+        "https://vk.ru/*",
+        "https://*.vk.ru/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "matches": [
+        "https://vk.com/*",
+        "https://*.vk.com/*",
+        "https://vk.ru/*",
+        "https://*.vk.ru/*"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "no-cover.png"
+      ],
+      "matches": [
+        "https://vk.com/*",
+        "https://*.vk.com/*",
+        "https://vk.ru/*",
+        "https://*.vk.ru/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "manifest_version": 3,
+  "name": "Yandex Music Lyrics",
+  "short_name": "YM Lyrics",
+  "version": "1.0.0",
+  "description": "Синхронизированный текст для Яндекс Музыки с fallback без externalAPI",
+  "permissions": [
+    "storage",
+    "cookies"
+  ],
+  "host_permissions": [
+    "https://music.yandex.ru/*",
+    "https://music.yandex.com/*",
+    "https://music.yandex.by/*",
+    "https://music.yandex.kz/*",
+    "https://music.yandex.ua/*",
+    "https://lrclib.net/*",
+    "https://apic-desktop.musixmatch.com/*",
+    "https://api.genius.com/*",
+    "https://genius.com/*",
+    "https://genius-proxy.rainbowbro0.workers.dev/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "ym-lyrics@rainbow",
+      "strict_min_version": "109.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "bridge.js"
+      ],
+      "matches": [
+        "https://music.yandex.ru/*",
+        "https://music.yandex.com/*",
+        "https://music.yandex.by/*",
+        "https://music.yandex.kz/*",
+        "https://music.yandex.ua/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "matches": [
+        "https://music.yandex.ru/*",
+        "https://music.yandex.com/*",
+        "https://music.yandex.by/*",
+        "https://music.yandex.kz/*",
+        "https://music.yandex.ua/*"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "no-cover.png"
+      ],
+      "matches": [
+        "https://music.yandex.ru/*",
+        "https://music.yandex.com/*",
+        "https://music.yandex.by/*",
+        "https://music.yandex.kz/*",
+        "https://music.yandex.ua/*"
+      ]
+    }
+  ]
+}

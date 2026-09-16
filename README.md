@@ -20,7 +20,7 @@
 
 ## Установка (Chromium — Chrome / Edge / Brave)
 
-1. Скачай нужный архив со страницы [Releases](https://github.com/rainbowbro0/vk-ym-lyrics/releases/latest):
+1. Скачай нужный архив со страницы [Releases](https://github.com/rainbowbro0/vk-ym-ytm-lyrics/releases/latest):
    - `vk-lyrics-chromium-X.X.X.zip`
    - `ym-lyrics-chromium-X.X.X.zip`
    - `yt-music-lyrics-chromium-X.X.X.zip`

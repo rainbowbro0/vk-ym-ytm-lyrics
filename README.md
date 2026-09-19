@@ -36,7 +36,9 @@
 
 ## Firefox
 
-Расширения для Firefox появятся на [addons.mozilla.org](https://addons.mozilla.org) в ближайшем будущем.
+- [VK Lyrics](https://addons.mozilla.org/addon/vk-lyrics/)
+- [Yandex Music Lyrics](https://addons.mozilla.org/addon/ym-lyrics/)
+- [YT Music Lyrics](https://addons.mozilla.org/addon/yt-music-lyrics/)
 
 ---
 
